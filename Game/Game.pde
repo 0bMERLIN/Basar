@@ -1,0 +1,103 @@
+GameManager gameManager;
+
+class MyGame implements IGame {
+  boolean done;
+  int start;
+
+  void setup() {
+    start = millis();
+    done = false;
+  }
+
+  boolean draw() {
+    background(100);
+    text("press any key to win. score: " + getScore(), width/2, height/2);
+    return done;
+  }
+
+  int getScore() {
+    return int((millis() - start) / 100);
+  }
+
+  void keyPressed() {
+    if (millis() - start > 500)
+      done = true;
+  }
+}
+
+class MyLogin implements ILogin {
+  boolean done;
+  String invalidUsernameCorrection;
+
+  void setup() {
+    done = false;
+    invalidUsernameCorrection = null;
+  }
+
+  boolean draw() {
+    background(100);
+    if (invalidUsernameCorrection != null) {
+      push();
+      fill(255, 0, 0);
+      text("Invalid username. Did you mean " + invalidUsernameCorrection, width/2- 200, height/2 - 60);
+      pop();
+    }
+    text("press any key to login as bingus.", width/2, height/2);
+    return done;
+  }
+
+  String getUsername() {
+    return "spoingus";
+  }
+
+  void keyPressed() {
+    done = true;
+  }
+
+  void onInvalidUsername(String similar) {
+    invalidUsernameCorrection = similar;
+    done = false;
+  }
+}
+
+class MyGameOver implements IGameOver {
+  int roundsLeft;
+  boolean done;
+  int score, highscore;
+
+  void setup(int roundsLeft, int score, int highscore) {
+    this.roundsLeft = roundsLeft;
+    this.done = false;
+    this.score = score;
+    this.highscore = highscore;
+  }
+
+  boolean draw() {
+    background(100);
+    text("score: " + score + ", highscore: " + highscore, width/2, height/2 - 40);
+    if (roundsLeft > 0) {
+      text("press any key to start next round.", width/2, height/2);
+    } else {
+      text("no more rounds left. press any key to end game.", width/2, height/2);
+    }
+    return done;
+  }
+
+  void keyPressed() {
+    done = true;
+  }
+}
+
+void setup() {
+  size(500, 500);
+  gameManager = new GameManager(new MyGame(), new MyLogin(), new MyGameOver());
+  gameManager.setup();
+}
+
+void keyPressed() {
+  gameManager.keyPressed();
+}
+
+void draw() {
+  gameManager.draw();
+}
