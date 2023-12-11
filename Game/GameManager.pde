@@ -58,6 +58,7 @@ class GameManager {
   private IGameOver gameOver;
 
   private void loginDraw() {
+    
     if (login.draw()) {
       String verificationResult = verifyName(login.getUsername());
       

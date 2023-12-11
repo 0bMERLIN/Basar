@@ -36,11 +36,11 @@ class MyLogin implements ILogin {
 
   boolean draw() {
     background(100);
-    
-    textSize(30);
+
+    textSize(30); // code sometimes hangs here??
     text("LOGIN", width/2, height/2-200);
     textSize(15);
-    
+
     if (invalidUsernameCorrection != null) {
       push();
       fill(255, 0, 0);
@@ -48,11 +48,12 @@ class MyLogin implements ILogin {
       pop();
     }
     text("press any key to login as " + getUsername(), width/2, height/2);
+    
     return done;
   }
 
   String getUsername() {
-    return "bingus1";
+    return "zabloing";
   }
 
   void keyPressed() {
@@ -83,7 +84,7 @@ class MyGameOver implements IGameOver {
     textSize(30);
     text("GAME OVER", width/2, height/2-200);
     textSize(15);
-    
+
     text("score: " + score + ", highscore: " + highscore, width/2, height/2 - 40);
     if (roundsLeft > 0) {
       text("press any key to start next round. you have " + roundsLeft + " rounds left.", width/2-120, height/2);

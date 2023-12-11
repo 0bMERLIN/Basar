@@ -17,6 +17,7 @@ class Database:
     def parse(self, content: str) -> dict:
         acc = {}
         for line in content.splitlines():
+            if line == "" or "," not in line: continue
             name, score = line.split(",")
             acc[name] = {"score": int(score)}
         return acc
@@ -36,6 +37,7 @@ class Database:
                 return
             for name, data in self.db.items():
                 f.write("\n" + name + "," + str(data["score"]))
+        self.cleanFile()
 
     def write(self, name: str, score: int):
         if name not in self.db:
@@ -61,19 +63,34 @@ class Database:
     def ranking(self) -> dict:
         return {name: self.db[name]["score"] for name in self.db.keys()}
 
+    def createUser(self, name: str):
+        self.db[name.replace(",", "")] = {"score": 0}
+        self.save(name)
+
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        r = "\n".join([name + "," + str(score) for name, score in db.ranking().items()])
-        self._set_headers()
-        self.wfile.write(bytes(r + "\r\n\r\n", "utf-8"))
-        self.wfile.write(bytes("END", "utf-8"))
+        if self.path == "/register":
+            htmlStr = open("register.html", "r").read()
+            self._set_headers()
+            self.wfile.write(bytes(htmlStr + "\r\n\r\n", "utf-8"))
+
+        else: # get ranking
+            r = "\n".join([name + "," + str(score) for name, score in db.ranking().items()])
+            self._set_headers()
+            self.wfile.write(bytes(r + "\r\n\r\n", "utf-8"))
+            self.wfile.write(bytes("END", "utf-8"))
 
     def _set_headers(self, status=200):
         self.send_response(status)
         self.end_headers()
 
     def do_POST(self):
+        if self.path == "/createUser":
+            content_length = int(self.headers["Content-Length"])
+            post_data = self.rfile.read(content_length).decode("utf-8")
+            db.createUser(post_data[post_data.find("=")+1:])
+
         if self.path == "/verify":
             content_length = int(self.headers["Content-Length"])
             post_data = self.rfile.read(content_length).decode("utf-8")

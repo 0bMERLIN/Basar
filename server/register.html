@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basar - Register a new User</title>
+</head>
+<body>
+    
+    <form id="myForm" action="/createUser" method="post">
+        <label for="lname">Register a new user.</label>
+        <input type="text" id="lname" name="lname">
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevents the default form submission behavior
+
+            const formData = new FormData(this);
+            
+            // Sending a POST request using fetch
+            fetch('/createUser', {
+                method: 'POST',
+                body: formData.get("lname")
+            })
+            .then(response => {
+                // Handle the response here (if needed)
+                console.log('Request succeeded:', response);
+            })
+            .catch(error => {
+                // Handle errors here
+                console.error('Request failed:', error);
+            });
+        });
+    </script>
+
+</body>
+</html>
