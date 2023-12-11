@@ -49,7 +49,7 @@ class GameManager {
   private GameState state;
   private String username;
   private int roundsLeft;
-  private final int maxRounds = 1;
+  private final int maxRounds = 5;
   private int highscore;
 
   // state handlers

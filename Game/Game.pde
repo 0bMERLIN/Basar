@@ -10,7 +10,7 @@ class MyGame implements IGame {
   }
 
   boolean draw() {
-    background(100);
+    background(10);
     text("press any key to win. score: " + getScore(), width/2, height/2);
     return done;
   }
@@ -36,18 +36,23 @@ class MyLogin implements ILogin {
 
   boolean draw() {
     background(100);
+    
+    textSize(30);
+    text("LOGIN", width/2, height/2-200);
+    textSize(15);
+    
     if (invalidUsernameCorrection != null) {
       push();
       fill(255, 0, 0);
-      text("Invalid username. Did you mean " + invalidUsernameCorrection, width/2- 200, height/2 - 60);
+      text("Invalid username. Did you mean " + invalidUsernameCorrection, width/2-240, height/2 - 60);
       pop();
     }
-    text("press any key to login as bingus.", width/2, height/2);
+    text("press any key to login as " + getUsername(), width/2, height/2);
     return done;
   }
 
   String getUsername() {
-    return "spoingus";
+    return "bingus1";
   }
 
   void keyPressed() {
@@ -74,11 +79,16 @@ class MyGameOver implements IGameOver {
 
   boolean draw() {
     background(100);
+
+    textSize(30);
+    text("GAME OVER", width/2, height/2-200);
+    textSize(15);
+    
     text("score: " + score + ", highscore: " + highscore, width/2, height/2 - 40);
     if (roundsLeft > 0) {
-      text("press any key to start next round.", width/2, height/2);
+      text("press any key to start next round. you have " + roundsLeft + " rounds left.", width/2-120, height/2);
     } else {
-      text("no more rounds left. press any key to end game.", width/2, height/2);
+      text("no more rounds left. press any key to end game.", width/2-120, height/2);
     }
     return done;
   }
