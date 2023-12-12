@@ -26,11 +26,15 @@ class MyGame implements IGame {
 }
 
 class MyLogin implements ILogin {
+  boolean unlocked;
   boolean done;
+  StringBuilder username;
   String invalidUsernameCorrection;
 
   void setup() {
+    unlocked = false;
     done = false;
+    username = new StringBuilder();
     invalidUsernameCorrection = null;
   }
 
@@ -53,11 +57,26 @@ class MyLogin implements ILogin {
   }
 
   String getUsername() {
-    return "zabloing";
+    return username.toString();
   }
 
   void keyPressed() {
-    done = true;
+    if (!unlocked) {
+      if (key == '}')
+        unlocked = true;
+      return;
+    }
+    
+    if (key == CODED) {
+      if (keyCode == ENTER) {
+        done = true;
+      }
+    } else if (key == BACKSPACE) {
+      if (username.length() > 0)
+        username.deleteCharAt(username.length() - 1);
+    } else {
+      username.append(key);
+    }
   }
 
   void onInvalidUsername(String similar) {
