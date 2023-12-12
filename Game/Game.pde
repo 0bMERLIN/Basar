@@ -39,11 +39,19 @@ class MyLogin implements ILogin {
   }
 
   boolean draw() {
-    background(100);
+    background(128, 0, 0);
+    fill(0, 255, 0);
+    
+    textAlign(CENTER);
+    if (!unlocked) {
+      textSize(18);
+      text("Ein Schüler des Informatikprofils muss das Spiel freischalten", width/2, height/2);
+      return false;
+    } 
 
     textSize(30); // code sometimes hangs here??
     text("LOGIN", width/2, height/2-200);
-    textSize(15);
+    textSize(18);
 
     if (invalidUsernameCorrection != null) {
       push();
@@ -51,7 +59,8 @@ class MyLogin implements ILogin {
       text("Invalid username. Did you mean " + invalidUsernameCorrection, width/2-240, height/2 - 60);
       pop();
     }
-    text("press any key to login as " + getUsername(), width/2, height/2);
+    text("Name:", width/2, height/2);
+    text(getUsername(), width/2, height/2 + 20);
     
     return done;
   }
@@ -67,14 +76,12 @@ class MyLogin implements ILogin {
       return;
     }
     
-    if (key == CODED) {
-      if (keyCode == ENTER) {
-        done = true;
-      }
+    if (key == RETURN || keyCode == ENTER) {
+      done = true;
     } else if (key == BACKSPACE) {
       if (username.length() > 0)
         username.deleteCharAt(username.length() - 1);
-    } else {
+    } else if (key != CODED) {
       username.append(key);
     }
   }
