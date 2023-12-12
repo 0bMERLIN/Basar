@@ -56,7 +56,7 @@ class MyLogin implements ILogin {
     if (invalidUsernameCorrection != null) {
       push();
       fill(255, 0, 0);
-      text("Invalid username. Did you mean " + invalidUsernameCorrection, width/2-240, height/2 - 60);
+      text(invalidUsernameCorrection, width/2, height/2 - 60);
       pop();
     }
     text("Name:", width/2, height/2);
