@@ -63,9 +63,12 @@ class Database:
     def ranking(self) -> dict:
         return {name: self.db[name]["score"] for name in self.db.keys()}
 
-    def createUser(self, name: str):
+    def createUser(self, name: str) -> bool:
+        if name in self.db:
+            return False # existiert schon
         self.db[name.replace(",", "")] = {"score": 0}
         self.save(name)
+        return True
 
 
 class MyServer(BaseHTTPRequestHandler):
@@ -89,7 +92,8 @@ class MyServer(BaseHTTPRequestHandler):
         if self.path == "/createUser":
             content_length = int(self.headers["Content-Length"])
             post_data = self.rfile.read(content_length).decode("utf-8")
-            db.createUser(post_data[post_data.find("=")+1:])
+            if not db.createUser(post_data[post_data.find("=")+1:]):
+                self._set_headers(409)
 
         if self.path == "/verify":
             content_length = int(self.headers["Content-Length"])
