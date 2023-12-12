@@ -105,17 +105,27 @@ class MyGameOver implements IGameOver {
   }
 
   boolean draw() {
-    background(100);
+    background(128, 0, 0);
 
-    textSize(30);
-    text("GAME OVER", width/2, height/2-200);
-    textSize(15);
+    fill(0, 255, 0);
+
+    textAlign(CENTER);
+
+    if (this.score >= this.highscore) {
+      textSize(30);
+      text("GUT GEMACHT!\nNeuer Highscore: " + highscore, width/2, height/2-200);
+    } else {
+      textSize(30);
+      text("GAME OVER", width/2, height/2-200);
+    }
+
+    textSize(18);
 
     text("score: " + score + ", highscore: " + highscore, width/2, height/2 - 40);
     if (roundsLeft > 0) {
-      text("press any key to start next round. you have " + roundsLeft + " rounds left.", width/2-120, height/2);
+      text("Du hast noch " + roundsLeft + " Versuche.\nDrücke irgendeine Taste um zu spielen!", width/2, height/2);
     } else {
-      text("no more rounds left. press any key to end game.", width/2-120, height/2);
+      text("Das waren deine 5 Versuche.\nDrücke irgendeine Taste.", width/2, height/2);
     }
     return done;
   }
