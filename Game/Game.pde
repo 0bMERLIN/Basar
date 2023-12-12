@@ -31,6 +31,8 @@ class MyLogin implements ILogin {
   StringBuilder username;
   String invalidUsernameCorrection;
 
+  SnowEffect snow = new SnowEffect();
+
   void setup() {
     unlocked = false;
     done = false;
@@ -40,6 +42,9 @@ class MyLogin implements ILogin {
 
   boolean draw() {
     background(128, 0, 0);
+
+    snow.draw();
+
     fill(0, 255, 0);
     
     textAlign(CENTER);
@@ -97,6 +102,8 @@ class MyGameOver implements IGameOver {
   boolean done;
   int score, highscore;
 
+  SnowEffect snow = new SnowEffect();
+
   void setup(int roundsLeft, int score, int highscore) {
     this.roundsLeft = roundsLeft;
     this.done = false;
@@ -106,6 +113,8 @@ class MyGameOver implements IGameOver {
 
   boolean draw() {
     background(128, 0, 0);
+
+    snow.draw();
 
     fill(0, 255, 0);
 
