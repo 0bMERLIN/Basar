@@ -1,12 +1,10 @@
 class Tree extends Obstacle {
   Tree(int x, int y) {
     this.pos = new PVector(x, y);
-    this.hbox1 = new PVector(x, y);
-    this.hbox2 = new PVector(64, 64);
+    this.hbox1 = new PVector(x, y+80);
+    this.hbox2 = new PVector(80, 80);
 
-    var img = loadImageBuffered("obstacles/tree_0.png");
-    img.resize(64, 64);
-    sprite = new FixedSprite(img);
+    sprite = new AnimatedSprite("obstacles/Tree.png", 80, 160, 4);
   }
 
   void tick() {

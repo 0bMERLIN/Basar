@@ -78,7 +78,7 @@ def tiles_per_row():
 tiles = [pygame.transform.scale(pygame.image.load(os.path.join(TILES_FOLDER, filename)).convert_alpha(), (TILE_SIZE,)*2)
          for filename in sorted(os.listdir(TILES_FOLDER), key=lambda fname: int(fname.replace(".png", ""))) if filename.endswith(".png")]
 
-sprites = [pygame.transform.scale(pygame.image.load(os.path.join(SPRITES_FOLDER, filename)).convert_alpha(), (TILE_SIZE,)*2)
+sprites = [pygame.image.load(os.path.join(SPRITES_FOLDER, filename)).convert_alpha()
            for filename in sorted(os.listdir(SPRITES_FOLDER)) if filename.endswith(".png")]
 
 camera_x = camera_y = 0
