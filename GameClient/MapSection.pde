@@ -2,6 +2,7 @@ class MapSection{
     int[][] tiles;
     Collectible[] collectibles;
     Obstacle[] obstacles;
+    int[] following;
 
     MapSection(JSONObject map_json){
         int section_width = map_json.getInt("width");
@@ -35,6 +36,14 @@ class MapSection{
             JSONObject obstacle_json = obstacles_json.getJSONObject(i);
             obstacles[i] = createObstacle(obstacle_json);
         }
+
+        JSONArray following_json = map_json.getJSONArray("following");
+
+        following = new int[following_json.size()];
+
+        for (int i = 0; i < following_json.size(); i++) {
+            following[i] = following_json.getInt(i);
+        }
     }
 
     void render(float x, float y, Tile[] tileset){
@@ -59,5 +68,9 @@ class MapSection{
 
     int getLength(){
         return TILE_SIZE*this.tiles.length;
+    }
+
+    int getRandomFollowing(){
+        return following[int(random(following.length))];
     }
 }

@@ -208,7 +208,11 @@
         ]
     ],
     "obstacles": [],
-    "following": [],
+    "following": [
+        0,
+        1,
+        2
+    ],
     "collectibles": [
         {
             "x": 321,
