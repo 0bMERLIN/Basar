@@ -15,14 +15,9 @@ class UserDoesNotExistException(Exception):
 
 class Database:
     def parse(self, content: str) -> dict:
-        acc = {}
-        for line in content.splitlines():
-            if line == "" or "," not in line: continue
-            name, score = line.split(",")
-            acc[name] = {"score": int(score)}
-        return acc
+        return json.loads(content)
 
-    def __init__(self, file="db.txt"):
+    def __init__(self, file="db.json"):
         self.file = file
         self.refresh()
     
@@ -31,13 +26,8 @@ class Database:
             self.db = self.parse(f.read())
 
     def save(self, name=None):
-        with open(self.file, "a") as f:
-            if name != None:
-                f.write("\n" + name + "," + str(self.db[name]["score"]))
-                return
-            for name, data in self.db.items():
-                f.write("\n" + name + "," + str(data["score"]))
-        self.cleanFile()
+        with open(self.file, "w") as f:
+           f.write(json.dumps(self.db))
 
     def write(self, name: str, score: int):
         if name not in self.db:
