@@ -79,3 +79,8 @@ class SkillIssue extends Exception {
         super(message);
     }
 }
+
+float getDiplayPresentXOffset(){
+  String score_str = str(gameManager.getScore());
+  return score_str.length() * 32 - 32;
+}

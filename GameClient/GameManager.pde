@@ -150,4 +150,8 @@ class GameManager {
     this.login = login;
     this.gameOver = gameOver;
   }
+
+  public int getScore(){
+    return game.getScore();
+  }
 }

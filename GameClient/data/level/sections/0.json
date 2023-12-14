@@ -224,7 +224,11 @@
             "id": 0
         }
     ],
-    "following": [],
+    "following": [
+        1,
+        2,
+        3
+    ],
     "collectibles": [
         {
             "x": 257,

@@ -67,7 +67,7 @@ class Level{
         for (int i = 0; i < this.map.length - 1; i++) {
             this.map[i] = this.map[i + 1];
         }
-        addMap(this.map.length - 1, int(floor(random(map_sections_json.length))));
+        addMap(this.map.length - 1, this.map[this.map.length - 1].getRandomFollowing());
     }
     
     void addMap(int i, int map_id) {
@@ -80,7 +80,7 @@ class Level{
             float y = p1.y - draw_y;
             
             if (y < 0) {
-                return false;
+                return true;
             }
             
             for (int i = 0; i * s < (p2.x - p1.x) + s; i += 1) {
