@@ -80,7 +80,7 @@ class Level{
             float y = p1.y - draw_y;
             
             if (y < 0) {
-                return false;
+                return true;
             }
             
             for (int i = 0; i * s < (p2.x - p1.x) + s; i += 1) {

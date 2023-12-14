@@ -18,7 +18,7 @@ class CollectionEffect extends Effect {
         speed = 2;
         this.spawn_pos = spawn_pos;
         this.pos = new PVector(spawn_pos.x, spawn_pos.y);
-        this.dest = new PVector(100, 50);
+        this.dest = new PVector(100 + getDiplayPresentXOffset(), 50);
     }
 
     boolean tick(){
