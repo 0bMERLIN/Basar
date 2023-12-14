@@ -36,6 +36,8 @@ Obstacle createObstacle(JSONObject obstacle_json){
   switch (id) {
     case 0:
       return new Tree(x, y);
+    case 1:
+      return new ShootingStarObstacle(x, y);
     default :
       return new Tree(x, y);
   }

@@ -209,7 +209,7 @@ class Level{
                 return true;
             }
         }
-        PVector p1r2 = new PVector(p1.x + scroll_dist_r - draw_x, p1.y - draw_y);
+        PVector p1r2 = new PVector(p1.x + scroll_dist_r - draw_x, p1.y - draw_y); 
         for (int i = 0; i < map[1].obstacles.length; i++) {
             if (map[1].obstacles[i].aabb(p1r2, p2, map[0].getLength())) {
                 return true;

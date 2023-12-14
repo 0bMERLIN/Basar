@@ -1,4 +1,4 @@
-static final boolean TESTING = false;
+static final boolean TESTING = true;
 
 ///////////////
 

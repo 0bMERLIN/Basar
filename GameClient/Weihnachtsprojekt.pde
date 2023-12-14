@@ -13,8 +13,8 @@ class WeihnachtsprojektGame implements IGame {
     try{
       game.tick();
     }
-    catch(Exception e){
-      exit();
+    catch(SkillIssue e){
+      return true;
     }
     return false;
   }

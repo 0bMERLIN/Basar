@@ -48,6 +48,7 @@ class MapSection{
         }
         for(int i = 0; i < obstacles.length; i++){
             obstacles[i].render(x, y);
+            obstacles[i].tick();
         }
         line(x, 0, x, height);
     }

@@ -207,7 +207,13 @@
             9
         ]
     ],
-    "obstacles": [],
+    "obstacles": [
+        {
+            "x": 257,
+            "y": 321,
+            "id": 1
+        }
+    ],
     "following": [],
     "collectibles": [
         {
