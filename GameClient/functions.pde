@@ -67,3 +67,13 @@ float clamp(float value, float minValue, float maxValue) {
   value = min(value, maxValue);
   return value;
 }
+
+class SkillIssue extends Exception {
+    public SkillIssue() {
+        super("SkillIssue, lol");
+    }
+
+    public SkillIssue(String message) {
+        super(message);
+    }
+}

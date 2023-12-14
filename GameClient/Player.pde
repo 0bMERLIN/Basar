@@ -6,12 +6,26 @@ class Player{
     int hp;
     int iframes;
     
-    float targetX = 450;
+    
+    float t_vel_x = 5;
+    float t_vel_x_c = 6;
+    float acc_x = 0.3;
+    
+    float t_vel_up = 15;
+    float t_vel_down = 20;
+    
+    float g = 0.4;
+    float jp = 10;
+    
+    
+    float targetX = 600;
+    
+    int jumptimer = 0;
     
     Player() {
         sprite = new StateSprite();
         Sprite d = new AnimatedSprite("player/player.png", 128, 128, 6);
-        d.setScale(0.75);
+        d.setScale(0.83);
         sprite.addState(d);
         pos = new PVector(300, 100);
         vel = new PVector(0, 0);
@@ -20,16 +34,12 @@ class Player{
         iframes = 0;
     }
     
-    void update(float speed, Level level, Game game) {
-        vel.add(new PVector(0, 0.4));
-        vel.y = clamp(vel.y, -15, 15);
+    void update(float speed, Level level, Game game) throws SkillIssue {
+        vel.add(new PVector(acc_x, g));
+        vel.x = clamp(vel.x, -100, pos.x < targetX ? t_vel_x_c : t_vel_x);
+        vel.y = clamp(vel.y, -t_vel_up, t_vel_down);
         
-        if (pos.x < targetX) {
-            vel.x = speed + 1;
-        }
-        else{
-            vel.x = speed;
-        }
+        text(jumptimer, 100, 100);
         
         pos.x -= speed;
         
@@ -48,10 +58,11 @@ class Player{
                 boolean coll_y1 = level.collideFloor(new PVector(pos.x + 20, pos.y + 256 * 0.4), new PVector(pos.x + 256 * 0.4 - 20, pos.y + 256 * 0.4), vel);
                 boolean coll_y2 = level.collideCeil(new PVector(pos.x + 20, pos.y), new PVector(pos.x + 256 * 0.4 - 20, pos.y), vel);
                 if (coll_y1 || coll_y2) {
-                    vel = new PVector(0, 0);
+                    vel.y = 0;
                     if (coll_y1) {
                         if (keyPressed) {
-                            vel = new PVector(0, -30);
+                            vel.y = -jp;
+                            jumptimer = 30 * steps;
                         }
                     }
                     pos.y -= nvel.y;
@@ -59,11 +70,21 @@ class Player{
                 }
             }
             
+            if (keyPressed && jumptimer > 0) {
+                g = 0.2;
+                jumptimer--;
+            }
+            else{
+                g = 0.4;
+                jumptimer = 0;
+            }
+            
             if (!x_done) {
                 pos.x += nvel.x;
                 boolean coll_x1 = level.collideX(new PVector(pos.x + 256 * 0.4 - 20, pos.y), new PVector(pos.x + 256 * 0.4 - 20, pos.y + 256 * 0.4), vel);
                 if (coll_x1) {
                     pos.x -= nvel.x; 
+                    vel.x = 1;
                 }
             }
         }
@@ -83,7 +104,7 @@ class Player{
     
     void render() {
         sprite.render(pos);
-        rect(pos.x, pos.y, 256 * 0.4, 256 * 0.4);
+        //rect(pos.x, pos.y, 256 * 0.4, 256 * 0.4);
         rect(pos.x + 20, pos.y, 256 * 0.4 - 40, 256 * 0.4);
         //text(hp, 100, 120);
     }

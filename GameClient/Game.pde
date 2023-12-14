@@ -27,7 +27,7 @@ class Game{
         setRandomCooldown();
     }
 
-    void tick(){
+    void tick() throws SkillIssue {
         setGradient(0, 0, width, height, color(#001744), color(#39364d), 1);
         renderBackgroundEffects();
         snow_overlay.render();
@@ -86,5 +86,9 @@ class Game{
         }
         random_cooldown--;
         return false;
+    }
+
+    void gameOver(){
+        exit();
     }
 }

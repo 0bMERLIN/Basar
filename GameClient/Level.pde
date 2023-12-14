@@ -74,7 +74,7 @@ class Level{
         this.map[i] = new MapSection(this.map_sections_json[map_id]);
     }
     
-    boolean collideCeil(PVector p1, PVector p2, PVector vel) {
+    boolean collideCeil(PVector p1, PVector p2, PVector vel) throws SkillIssue {
         try{
             int s = 40;
             float y = p1.y - draw_y;
@@ -106,11 +106,11 @@ class Level{
             return false;
         }
         catch(Exception e){
-            return false;
+            throw new SkillIssue("Ded");
         }
     }
     
-    boolean collideFloor(PVector p1, PVector p2, PVector vel) {
+    boolean collideFloor(PVector p1, PVector p2, PVector vel) throws SkillIssue {
         try{
             int s = 40;
             float y = p1.y - draw_y;
@@ -142,11 +142,11 @@ class Level{
             return false;
         }
         catch(Exception e){
-            return false;
+            throw new SkillIssue("Ded");
         }
     }
     
-    boolean collideX(PVector p1, PVector p2, PVector vel) {
+    boolean collideX(PVector p1, PVector p2, PVector vel) throws SkillIssue {
         try{
             int s = 40;
             
@@ -173,7 +173,7 @@ class Level{
             return false;
         }
         catch(Exception e){
-            return false;
+            throw new SkillIssue("Ded");
         }
     }
     

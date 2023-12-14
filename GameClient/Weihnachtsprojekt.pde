@@ -10,7 +10,12 @@ class WeihnachtsprojektGame implements IGame {
   
   boolean draw() {
     // catch game over exception here!
-    game.tick();
+    try{
+      game.tick();
+    }
+    catch(Exception e){
+      exit();
+    }
     return false;
   }
   
