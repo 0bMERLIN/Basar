@@ -1,0 +1,284 @@
+[
+    {
+        "name": "0",
+        "collidable": false,
+        "sprite": "level/tiles/0.png",
+        "passable": false
+    },
+    {
+        "name": "1",
+        "collidable": true,
+        "sprite": "level/tiles/1.png",
+        "passable": false
+    },
+    {
+        "name": "2",
+        "collidable": true,
+        "sprite": "level/tiles/2.png",
+        "passable": false
+    },
+    {
+        "name": "3",
+        "collidable": true,
+        "sprite": "level/tiles/3.png",
+        "passable": false
+    },
+    {
+        "name": "4",
+        "collidable": true,
+        "sprite": "level/tiles/4.png",
+        "passable": false
+    },
+    {
+        "name": "5",
+        "collidable": true,
+        "sprite": "level/tiles/5.png",
+        "passable": false
+    },
+    {
+        "name": "6",
+        "collidable": true,
+        "sprite": "level/tiles/6.png",
+        "passable": false
+    },
+    {
+        "name": "7",
+        "collidable": true,
+        "sprite": "level/tiles/7.png",
+        "passable": false
+    },
+    {
+        "name": "8",
+        "collidable": true,
+        "sprite": "level/tiles/8.png",
+        "passable": false
+    },
+    {
+        "name": "9",
+        "collidable": true,
+        "sprite": "level/tiles/9.png",
+        "passable": false
+    },
+    {
+        "name": "10",
+        "collidable": true,
+        "sprite": "level/tiles/10.png",
+        "passable": false
+    },
+    {
+        "name": "11",
+        "collidable": true,
+        "sprite": "level/tiles/11.png",
+        "passable": false
+    },
+    {
+        "name": "12",
+        "collidable": true,
+        "sprite": "level/tiles/12.png",
+        "passable": false
+    },
+    {
+        "name": "13",
+        "collidable": true,
+        "sprite": "level/tiles/13.png",
+        "passable": false
+    },
+    {
+        "name": "14",
+        "collidable": true,
+        "sprite": "level/tiles/14.png",
+        "passable": false
+    },
+    {
+        "name": "15",
+        "collidable": true,
+        "sprite": "level/tiles/15.png",
+        "passable": false
+    },
+    {
+        "name": "16",
+        "collidable": true,
+        "sprite": "level/tiles/16.png",
+        "passable": false
+    },
+    {
+        "name": "17",
+        "collidable": true,
+        "sprite": "level/tiles/17.png",
+        "passable": false
+    },
+    {
+        "name": "18",
+        "collidable": true,
+        "sprite": "level/tiles/18.png",
+        "passable": false
+    },
+    {
+        "name": "19",
+        "collidable": true,
+        "sprite": "level/tiles/19.png",
+        "passable": false
+    },
+    {
+        "name": "20",
+        "collidable": true,
+        "sprite": "level/tiles/20.png",
+        "passable": false
+    },
+    {
+        "name": "21",
+        "collidable": true,
+        "sprite": "level/tiles/21.png",
+        "passable": false
+    },
+    {
+        "name": "22",
+        "collidable": true,
+        "sprite": "level/tiles/22.png",
+        "passable": false
+    },
+    {
+        "name": "23",
+        "collidable": true,
+        "sprite": "level/tiles/23.png",
+        "passable": false
+    },
+    {
+        "name": "24",
+        "collidable": true,
+        "sprite": "level/tiles/24.png",
+        "passable": false
+    },
+    {
+        "name": "25",
+        "collidable": true,
+        "sprite": "level/tiles/25.png",
+        "passable": false
+    },
+    {
+        "name": "26",
+        "collidable": true,
+        "sprite": "level/tiles/26.png",
+        "passable": false
+    },
+    {
+        "name": "27",
+        "collidable": true,
+        "sprite": "level/tiles/27.png",
+        "passable": false
+    },
+    {
+        "name": "28",
+        "collidable": true,
+        "sprite": "level/tiles/28.png",
+        "passable": false
+    },
+    {
+        "name": "29",
+        "collidable": true,
+        "sprite": "level/tiles/29.png",
+        "passable": false
+    },
+    {
+        "name": "30",
+        "collidable": true,
+        "sprite": "level/tiles/30.png",
+        "passable": false
+    },
+    {
+        "name": "31",
+        "collidable": true,
+        "sprite": "level/tiles/31.png",
+        "passable": false
+    },
+    {
+        "name": "32",
+        "collidable": true,
+        "sprite": "level/tiles/32.png",
+        "passable": false
+    },
+    {
+        "name": "33",
+        "collidable": true,
+        "sprite": "level/tiles/33.png",
+        "passable": false
+    },
+    {
+        "name": "34",
+        "collidable": true,
+        "sprite": "level/tiles/34.png",
+        "passable": false
+    },
+    {
+        "name": "35",
+        "collidable": true,
+        "sprite": "level/tiles/35.png",
+        "passable": false
+    },
+    {
+        "name": "36",
+        "collidable": true,
+        "sprite": "level/tiles/36.png",
+        "passable": false
+    },
+    {
+        "name": "37",
+        "collidable": false,
+        "sprite": "level/tiles/37.png",
+        "passable": false
+    },
+    {
+        "name": "38",
+        "collidable": false,
+        "sprite": "level/tiles/38.png",
+        "passable": false
+    },
+    {
+        "name": "39",
+        "collidable": false,
+        "sprite": "level/tiles/39.png",
+        "passable": false
+    },
+    {
+        "name": "40",
+        "collidable": true,
+        "sprite": "level/tiles/40.png",
+        "passable": true
+    },
+    {
+        "name": "41",
+        "collidable": true,
+        "sprite": "level/tiles/41.png",
+        "passable": true
+    },
+    {
+        "name": "42",
+        "collidable": true,
+        "sprite": "level/tiles/42.png",
+        "passable": true
+    },
+    {
+        "name": "43",
+        "collidable": true,
+        "sprite": "level/tiles/43.png",
+        "passable": true
+    },
+    {
+        "name": "44",
+        "collidable": false,
+        "sprite": "level/tiles/44.png",
+        "passable": false
+    },
+    {
+        "name": "45",
+        "collidable": true,
+        "sprite": "level/tiles/45.png",
+        "passable": true
+    },
+    {
+        "name": "46",
+        "collidable": true,
+        "sprite": "level/tiles/46.png",
+        "passable": true
+    }
+]
