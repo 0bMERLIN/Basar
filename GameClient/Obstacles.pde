@@ -45,7 +45,7 @@ class ShootingStarObstacle extends Obstacle {
     sprite.render(-sprite.getWidth() / 4, -sprite.getHeight()/2);
 
     popMatrix();
-    rect(this.hbox1.x + x, this.hbox1.y + y, hbox2.x, hbox2.y);
+    if(DEBUG) rect(this.hbox1.x + x, this.hbox1.y + y, hbox2.x, hbox2.y);
 
   }
 }

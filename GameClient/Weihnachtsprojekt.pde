@@ -57,7 +57,7 @@ class WeihnachtsprojektGame implements IGame {
       text(str, width / 2.0, height / 2.0 + i*50.0);
     }
     fill(180);
-    text("[Eine taste zum überspringen drücken]", width / 2.0, height - 100);
+    text("[Eine Taste zum überspringen drücken]", width / 2.0, height - 100);
     pop();
 
     if (loreTime - loreStartTime > loreShownSec * 1000.0) {
