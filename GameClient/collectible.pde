@@ -30,7 +30,7 @@ class Collectible{
 
     void render(float x, float y){
         image(this.sprite, x + pos.x, y + pos.y);
-        rect(x + pos.x, y + pos.y, 64, 64);
+        if(DEBUG) rect(x + pos.x, y + pos.y, 64, 64);
     }
 
     void render(PVector pos){

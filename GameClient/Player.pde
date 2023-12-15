@@ -112,7 +112,7 @@ class Player{
     void render() {
         sprite.render(pos);
         //rect(pos.x, pos.y, 256 * 0.4, 256 * 0.4);
-        rect(pos.x + 20, pos.y, 256 * 0.4 - 40, 256 * 0.4);
+        if(DEBUG) rect(pos.x + 20, pos.y, 256 * 0.4 - 40, 256 * 0.4);
         renderHp();
         //text(hp, 100, 120);
     }

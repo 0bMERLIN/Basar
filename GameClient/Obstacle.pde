@@ -20,7 +20,7 @@ abstract class Obstacle {
     push();
     sprite.render(new PVector(x+pos.x, y+pos.y));
     pop();
-    rect(x + hbox1.x, y + hbox1.y, hbox2.x, hbox2.y);
+    if(DEBUG) rect(x + hbox1.x, y + hbox1.y, hbox2.x, hbox2.y);
   }
 
   void render(PVector pos) {
