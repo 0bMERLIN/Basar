@@ -104,7 +104,9 @@ class GameManager {
 
   public void setup() {
     if (TESTING) {
+      state = GameState.GAME;
       game.setup();
+      return;
     }
     
     state = GameState.LOGIN;
@@ -132,11 +134,13 @@ class GameManager {
   }
 
   public void keyPressed() {
+    
     switch (state) {
     case LOGIN:
       login.keyPressed();
       break;
     case GAME:
+    
       game.keyPressed();
       break;
     case GAME_OVER:
