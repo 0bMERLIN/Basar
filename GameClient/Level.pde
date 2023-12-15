@@ -202,20 +202,16 @@ class Level{
     }
     
     boolean obstacle_collision(PVector p1, PVector p2, Game game) {
-        PVector p1r = new PVector(p1.x + scroll_dist_r - draw_x, p1.y - draw_y);
-        
-        for (int i = 0; i < map[0].obstacles.length; i++) {
-            if (map[0].obstacles[i].aabb(p1r, p2)) {
-                return true;
+        float x = p1.x + scroll_dist_r;
+        int cmapi = 0;
+        for (int j = 0; j < map.length; j++) {
+            for (int i = 0; i < map[cmapi + j].obstacles.length; i++) {
+                if (map[cmapi + j].obstacles[i].aabb(new PVector(x, p1.y - draw_y), p2)) {
+                    return true;
+                }
             }
+            x -= map[cmapi].getLength();
         }
-        PVector p1r2 = new PVector(p1.x + scroll_dist_r - draw_x, p1.y - draw_y); 
-        for (int i = 0; i < map[1].obstacles.length; i++) {
-            if (map[1].obstacles[i].aabb(p1r2, p2, map[0].getLength())) {
-                return true;
-            }
-        }
-        
         return false;
     }
     
