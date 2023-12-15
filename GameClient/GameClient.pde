@@ -9,6 +9,7 @@ class MyLogin implements ILogin {
   SnowEffect snow = new SnowEffect();
 
   void setup() {
+    unlocked = false;
     done = false;
     username = new StringBuilder();
     invalidUsernameCorrection = null;
