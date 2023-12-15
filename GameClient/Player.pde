@@ -36,7 +36,7 @@ class Player{
         pos = new PVector(300, 100);
         vel = new PVector(0, 0);
         
-        hp = 30;
+        hp = 3;
         iframes = 0;
         dmg_overlay_timer = 0;
     }

@@ -30,7 +30,7 @@ class Game{
     }
 
     void tick() throws SkillIssue {
-        float sf = speed_factor + ((float)t/5000);
+        float sf = speed_factor + ((float)t/25000);
 
         setGradient(0, 0, width, height, color(#001744), color(#39364d), 1);
         renderBackgroundEffects();
@@ -44,8 +44,6 @@ class Game{
         displayScore(score, 50, 50);
 
         randomEffects();
-
-        text(sf, 200, 200);
         t++;
     }
 
