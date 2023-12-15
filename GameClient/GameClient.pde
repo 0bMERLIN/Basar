@@ -127,6 +127,12 @@ void setup() {
 void keyPressed() {
   
   gameManager.keyPressed();
+  if(key == ESC){
+    key = 0;
+  }
+  else if(key == '?'){
+    exit();
+  }
 }
 
 void draw() {
