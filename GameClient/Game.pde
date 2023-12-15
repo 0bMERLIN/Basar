@@ -12,6 +12,8 @@ class Game{
     int random_cooldown;
 
     float speed_factor = 1.0;
+
+    int t = 0;
     
     Game(){
         player = new Player();
@@ -28,18 +30,23 @@ class Game{
     }
 
     void tick() throws SkillIssue {
+        float sf = speed_factor + ((float)t/5000);
+
         setGradient(0, 0, width, height, color(#001744), color(#39364d), 1);
         renderBackgroundEffects();
         snow_overlay.render();
         background_overlay.render();
         level.render();
         player.render();
-        level.scroll(speed_factor, this);
-        player.update(speed_factor, level, this);
+        level.scroll(sf, this);
+        player.update(sf, level, this);
         renderForegroundEffects();
         displayScore(score, 50, 50);
 
         randomEffects();
+
+        text(sf, 200, 200);
+        t++;
     }
 
     void renderBackgroundEffects(){

@@ -3,7 +3,7 @@ boolean LORE = true;
 class WeihnachtsprojektGame implements IGame {
   Game game;
   int loreStartTime;
-  int loreShownSec = 4;
+  int loreShownSec = 8;
   int loreSectionShown = 0;
   int loreTime;
   boolean isFirstRound;

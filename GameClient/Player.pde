@@ -3,9 +3,12 @@ class Player{
     PVector vel;
     StateSprite sprite;
     PImage heart_sprite;
+    PImage dmg_overlay_sprite;
     
     int hp;
     int iframes;
+    int dmg_overlay_timer;
+    int dmg_overlay_time = 60;
     
     
     float t_vel_x = 5;
@@ -27,13 +30,15 @@ class Player{
         sprite = new StateSprite();
         Sprite d = new AnimatedSprite("player/player.png", 128, 128, 6);
         heart_sprite = loadImageBuffered("player/heart.png");
+        dmg_overlay_sprite = loadImageBuffered("player/dmg_overlay.png");
         d.setScale(0.83);
         sprite.addState(d);
         pos = new PVector(300, 100);
         vel = new PVector(0, 0);
         
-        hp = 3;
+        hp = 30;
         iframes = 0;
+        dmg_overlay_timer = 0;
     }
     
     void update(float speed_factor, Level level, Game game) throws SkillIssue {
@@ -98,6 +103,7 @@ class Player{
             if (level.obstacle_collision(new PVector(pos.x + 20, pos.y), new PVector(256 * 0.4 - 40, 256 * 0.4), game)) {
                 hp--;
                 iframes = 60;
+                dmg_overlay_timer = dmg_overlay_time;
             }
         }
         else{
@@ -114,12 +120,23 @@ class Player{
         //rect(pos.x, pos.y, 256 * 0.4, 256 * 0.4);
         if(DEBUG) rect(pos.x + 20, pos.y, 256 * 0.4 - 40, 256 * 0.4);
         renderHp();
+        renderDmgOverlay();
         //text(hp, 100, 120);
     }
 
     void renderHp(){
         for(int i = 0; i < hp; i++){
-            image(heart_sprite, 20+32*i, height-50);
+            image(heart_sprite, 20+40*i, height-50);
+        }
+    }
+
+    void renderDmgOverlay(){
+        if(dmg_overlay_timer > 0){
+            push();
+            tint(255, 255*((float)dmg_overlay_timer/(float)dmg_overlay_time));
+            image(dmg_overlay_sprite, 0, 0);
+            dmg_overlay_timer--;
+            pop();
         }
     }
 }
