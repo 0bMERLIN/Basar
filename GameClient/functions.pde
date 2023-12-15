@@ -38,6 +38,10 @@ Obstacle createObstacle(JSONObject obstacle_json){
       return new Tree(x, y);
     case 1:
       return new ShootingStarObstacle(x, y);
+    case 2:
+      return new Elf2(x,y);
+    case 3:
+      return new Elf(x,y);
     default :
       return new Tree(x, y);
   }

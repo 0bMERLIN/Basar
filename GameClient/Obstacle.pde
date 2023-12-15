@@ -1,3 +1,6 @@
+boolean HITBOXES = false;
+
+
 abstract class Obstacle {
   PVector pos;
 
@@ -13,17 +16,23 @@ abstract class Obstacle {
   boolean aabb(PVector c_pos, PVector c_hbox) {
     return this.aabb(c_pos, c_hbox, 0);
   }
-  
+
   abstract void tick();
 
   void render(float x, float y) {
     push();
     sprite.render(new PVector(x+pos.x, y+pos.y));
     pop();
-    rect(x + hbox1.x, y + hbox1.y, hbox2.x, hbox2.y);
+    if (HITBOXES) rect(x + hbox1.x, y + hbox1.y, hbox2.x, hbox2.y);
   }
 
   void render(PVector pos) {
     this.render(pos.x, pos.y);
+  }
+}
+
+abstract class HarmlessObstacle extends Obstacle {
+  boolean aabb(PVector c_pos, PVector c_hbox, int x_offset) {
+    return false;
   }
 }

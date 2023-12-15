@@ -49,3 +49,29 @@ class ShootingStarObstacle extends Obstacle {
 
   }
 }
+
+class Elf2 extends HarmlessObstacle {
+  Elf2(int x, int y) {
+    this.pos = new PVector(x, y);
+    this.hbox1 = new PVector(x, y);
+    this.hbox2 = new PVector(64, 64);
+
+    sprite = new AnimatedSprite("obstacles/Elf2.png", 64, 64, 8);
+  }
+
+  void tick() {
+  }
+}
+
+class Elf extends HarmlessObstacle {
+  Elf(int x, int y) {
+    this.pos = new PVector(x, y);
+    this.hbox1 = new PVector(x, y);
+    this.hbox2 = new PVector(64, 64);
+
+    sprite = new AnimatedSprite("obstacles/Elf.png", 64, 64, 8);
+  }
+
+  void tick() {
+  }
+}
