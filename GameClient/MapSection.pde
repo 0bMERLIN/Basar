@@ -59,7 +59,7 @@ class MapSection{
             obstacles[i].render(x, y);
             obstacles[i].tick();
         }
-        line(x, 0, x, height);
+        if (DEBUG) line(x, 0, x, height);
     }
 
     void render(PVector pos, Tile[] tileset){
