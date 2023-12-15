@@ -9,7 +9,7 @@ enum GameState {
 // Lasse
 interface IGame {
   // called before every round.
-  void setup();
+  void setup(boolean isFirstRound);
 
   // ._.
   boolean draw();
@@ -72,7 +72,7 @@ class GameManager {
       }
       highscore = getRanking().get(login.getUsername());
       
-      game.setup();
+      game.setup(true);
       state = GameState.GAME;
       username = login.getUsername();
       roundsLeft = maxRounds - 1;
@@ -82,7 +82,7 @@ class GameManager {
   private void gameOverDraw() {
     if (gameOver.draw()) {
       if (roundsLeft > 0) {
-        game.setup();
+        game.setup(false);
         state = GameState.GAME;
         roundsLeft--;
       } else {
@@ -104,7 +104,9 @@ class GameManager {
 
   public void setup() {
     if (TESTING) {
-      game.setup();
+      state = GameState.GAME;
+      game.setup(true);
+      return;
     }
     
     state = GameState.LOGIN;
@@ -132,11 +134,13 @@ class GameManager {
   }
 
   public void keyPressed() {
+    
     switch (state) {
     case LOGIN:
       login.keyPressed();
       break;
     case GAME:
+    
       game.keyPressed();
       break;
     case GAME_OVER:
