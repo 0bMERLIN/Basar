@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Screen Canvas</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif;
+            font-weight: 500;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        #scorediv {
+            border-radius: 10px;
+            border: 1px solid white;
+            margin: auto;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: white;
+            width: 700px;
+            height: 600px;
+            position: relative;
+        }
+
+        #overlaydiv {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+
+        li {
+            font-size: 35px;
+            display: flex;
+            align-items: left;
+        }
+
+        .index{
+            margin-top: 0px;
+            margin-bottom: 11px;
+            padding: 0px;
+            min-width: 60px;
+            text-align: right;
+            flex: 0;
+        }
+        .name{
+            margin-left: 20px;
+            margin-top: 0px;
+            margin-bottom: 11px;
+            padding: 0px;
+            min-width: 300px;
+            flex: 0;
+        }
+        .score{
+            margin-left: 20px;
+            margin-top: 0px;
+            margin-bottom: 11px;
+            padding: 0px;
+            flex: 1;
+            text-align: right;
+            margin-right: 10px;
+        }
+        .i1{
+            width: 50px;
+            height: 50px;
+            transform: translateY(-2px);
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="myCanvas"></canvas>
+    <div id="overlaydiv">
+        <div id="scorediv">
+            <ul id="scoreList">
+                <!-- Scores will be dynamically added here -->
+            </ul>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            var canvas = document.getElementById('myCanvas');
+            var context = canvas.getContext('2d');
+
+            // Set the canvas size to fill the entire screen
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            let width = canvas.width;
+            let height = canvas.height;
+
+            function horizontalGradientBackground(c1, c2) {
+                var grd = context.createLinearGradient(0, 0, 0, height);
+                grd.addColorStop(0, c1);
+                grd.addColorStop(1, c2);
+                context.fillStyle = grd;
+                context.fillRect(0, 0, width, height);
+            }
+
+            var snowLayer1 = document.createElement("img")
+            snowLayer1.src = "/sprites/snowLayer1.png"
+            var snowLayer2 = document.createElement("img")
+            snowLayer2.src = "/sprites/snowLayer2.png"
+            var snowLayer1Y = 0
+            var snowLayer2Y = 0
+
+            function drawImage(img, x, y) {
+                context.drawImage(img, x, y);
+            }
+
+            function drawSnow() {
+                if (snowLayer1Y > 0) {
+                    snowLayer1Y = -100;
+                }
+                for (var x = 0; x < 3; x++) {
+                    for (var y = 0; y < 8; y++) {
+                        drawImage(snowLayer1, x * 550, y * 100 + snowLayer1Y)
+                    }
+                }
+
+                if (snowLayer2Y > 0) {
+                    snowLayer2Y = -250;
+                }
+                for (var x = 0; x < 3; x++) {
+                    for (var y = 0; y < 8; y++) {
+                        drawImage(snowLayer2, x * 550, y * 250 + snowLayer2Y)
+                    }
+                }
+                snowLayer1Y += .4;
+                snowLayer2Y += .6;
+            }
+
+            // Draw function
+            function draw() {
+                // Your drawing code goes here
+                horizontalGradientBackground("#001744", "#39364d");
+                drawSnow();
+
+                // Additional drawing or animation code can be added here
+
+                // Request the next animation frame
+                requestAnimationFrame(draw);
+            }
+
+            // Initial call to the draw function
+            draw();
+        };
+
+        function updateScoreboard() {
+            // Replace 'YOUR_DOMAIN_URL' with the actual domain providing scoreboard information
+            const scoreboardURL = 'http://localhost:8080';
+
+            // Fetch data from the provided domain
+            fetch(scoreboardURL)
+                .then(response => response.text())
+                .then(data => {
+                    // Split the data into individual lines
+                    const lines = data.split('\n');
+                    document.getElementById('scoreList').innerHTML = '';
+
+                    // Parse scores into an array of objects
+                    const scores = lines
+                        .filter(line => line.trim() !== 'END' && line.trim() !== '')
+                        .map(line => {
+                            const [name, score] = line.split(',');
+                            return { name, score: parseInt(score, 10) };
+                        });
+
+                    // Sort scores in descending order
+                    scores.sort((a, b) => b.score - a.score);
+
+                    // Display only the top 10 scores
+                    scores.slice(0, 10).forEach((score, index) => {
+                        const scoreList = document.getElementById('scoreList');
+                        const listItem = document.createElement('li');
+                        //listItem.textContent = `${index + 1}. ${score.name}: ${score.score}`;
+                        const p1 = document.createElement('p');
+                        p1.className = 'index';
+                        p1.innerText = `${index + 1}.`
+
+                        const p2 = document.createElement('p');
+                        p2.className = 'name';
+                        p2.innerText = `${score.name}`
+
+                        const p3 = document.createElement('p');
+                        p3.className = 'score';
+                        p3.innerText = `${score.score}`
+
+                        const i1 = document.createElement('img');
+                        i1.className = 'i1';
+                        i1.src = '/sprites/gift_0.png';
+
+                        listItem.appendChild(p1);
+                        listItem.appendChild(p2);
+                        listItem.appendChild(p3);
+                        listItem.appendChild(i1);
+                        scoreList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching scoreboard:', error));
+        }
+
+        // Update the scoreboard initially and then every 5 seconds (5000 milliseconds)
+        updateScoreboard();
+        setInterval(updateScoreboard, 5000);
+    </script>
+
+</body>
+
+</html>

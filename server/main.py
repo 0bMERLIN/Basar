@@ -3,6 +3,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import traceback
 import fuzzy
+import os
 
 hostName = "localhost"
 serverPort = 8080
@@ -63,19 +64,56 @@ class Database:
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == "/register":
+        print(self.path)
+        if self.path.startswith("/sprites/"):
+            # Serve files from the "/sprites" directory
+            file_path = os.path.join(os.getcwd(), self.path[1:])
+            try:
+                with open(file_path, "rb") as file:
+                    content = file.read()
+                self.send_response(200)
+                self.send_header("Content-Type", self.guess_type(file_path))
+                self.send_header("Content-Length", len(content))
+                self.end_headers()
+                self.wfile.write(content)
+            except FileNotFoundError:
+                self.send_response(404)
+                self.end_headers()
+                self.wfile.write(b'File Not Found')
+
+        elif self.path == "/register":
             htmlStr = open("register.html", "r").read()
             self._set_headers()
             self.wfile.write(bytes(htmlStr + "\r\n\r\n", "utf-8"))
+
+        elif self.path == "/scoreboard":
+            htmlStr = open("scoreboard.html", "r").read()
+            self._set_headers()
+            self.wfile.write(bytes(htmlStr + "\r\n\r\n", "utf-8"))       
 
         else: # get ranking
             r = "\n".join([name + "," + str(score) for name, score in db.ranking().items()])
             self._set_headers()
             self.wfile.write(bytes(r + "\r\n\r\n", "utf-8"))
             self.wfile.write(bytes("END", "utf-8"))
+    def guess_type(self, path):
+        # Guess the Content-Type based on the file extension
+        _, ext = os.path.splitext(path)
+        ext = ext.lower()
+        if ext == ".html":
+            return "text/html"
+        elif ext == ".png":
+            return "image/png"
+        elif ext == ".jpg" or ext == ".jpeg":
+            return "image/jpeg"
+        else:
+            return "application/octet-stream"
 
     def _set_headers(self, status=200):
         self.send_response(status)
+        self.send_header("Content-type", "text/html")
+        # Allow requests from any origin (not suitable for production)
+        self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
 
     def do_POST(self):
