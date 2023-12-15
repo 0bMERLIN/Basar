@@ -22,18 +22,18 @@ class ShootingStarObstacle extends Obstacle {
   }
 
   void calcHitbox() {
-    this.hbox1 = new PVector(pos.x, pos.y);
-    this.hbox2 = new PVector(102*2, 102);
+    this.hbox1 = new PVector(pos.x -35, pos.y - 35);
+    this.hbox2 = new PVector(70*2, 70);
   }
 
   void tick() {
-    calcHitbox();
-
     pos.y = 300 + sin(millis() / 100.0 + seed) * float(seed);
     pos.x -= 5;
+    calcHitbox();
   }
   
   void render(float x, float y) {
+    calcHitbox();
     pushMatrix();
     float h = 60;
     float b = width;
@@ -45,5 +45,7 @@ class ShootingStarObstacle extends Obstacle {
     sprite.render(-sprite.getWidth() / 4, -sprite.getHeight()/2);
 
     popMatrix();
+    rect(this.hbox1.x + x, this.hbox1.y + y, hbox2.x, hbox2.y);
+
   }
 }

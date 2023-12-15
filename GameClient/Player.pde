@@ -2,6 +2,7 @@ class Player{
     PVector pos;
     PVector vel;
     StateSprite sprite;
+    PImage heart_sprite;
     
     int hp;
     int iframes;
@@ -12,7 +13,7 @@ class Player{
     float acc_x = 0.3;
     
     float t_vel_up = 15;
-    float t_vel_down = 20;
+    float t_vel_down = 26;
     
     float g = 0.4;
     float jp = 10;
@@ -25,6 +26,7 @@ class Player{
     Player() {
         sprite = new StateSprite();
         Sprite d = new AnimatedSprite("player/player.png", 128, 128, 6);
+        heart_sprite = loadImageBuffered("player/heart.png");
         d.setScale(0.83);
         sprite.addState(d);
         pos = new PVector(300, 100);
@@ -39,7 +41,7 @@ class Player{
         vel.x = clamp(vel.x, -100, pos.x < targetX ? t_vel_x_c : t_vel_x);
         vel.y = clamp(vel.y, -t_vel_up, t_vel_down);
         
-        text(jumptimer, 100, 100);
+        //text(jumptimer, 100, 100);
         
         pos.x -= speed;
         
@@ -100,12 +102,23 @@ class Player{
         else{
             iframes--;
         }
+
+        if(hp <= 0){
+            throw new SkillIssue("Baum");
+        }
     }
     
     void render() {
         sprite.render(pos);
         //rect(pos.x, pos.y, 256 * 0.4, 256 * 0.4);
         rect(pos.x + 20, pos.y, 256 * 0.4 - 40, 256 * 0.4);
+        renderHp();
         //text(hp, 100, 120);
+    }
+
+    void renderHp(){
+        for(int i = 0; i < hp; i++){
+            image(heart_sprite, 20+32*i, height-50);
+        }
     }
 }
