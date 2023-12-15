@@ -55,8 +55,8 @@ class Level{
     }
     
     void scroll(float d, Game game) {
-        scroll_dist += d;
-        scroll_dist_r += d;
+        scroll_dist += d*BASE_SPEED;
+        scroll_dist_r += d*BASE_SPEED;
         if (scroll_dist_r > this.map[0].getLength()) {
             mapShift();
             scroll_dist_r = 0;

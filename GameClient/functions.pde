@@ -2,7 +2,7 @@ import java.util.Map;
 HashMap<String,PImage> image_buffer = new HashMap<String,PImage>();
 
 static final int TILE_SIZE = 64;
-
+static final float BASE_SPEED = 5.0;
 
 void setGradient(int x, int y, float w, float h, color c1, color c2, int axis ) {
   noFill();

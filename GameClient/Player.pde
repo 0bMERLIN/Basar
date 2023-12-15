@@ -36,18 +36,19 @@ class Player{
         iframes = 0;
     }
     
-    void update(float speed, Level level, Game game) throws SkillIssue {
+    void update(float speed_factor, Level level, Game game) throws SkillIssue {
         vel.add(new PVector(acc_x, g));
-        vel.x = clamp(vel.x, -100, pos.x < targetX ? t_vel_x_c : t_vel_x);
+        vel.x = clamp(vel.x, -100, (pos.x < targetX ? t_vel_x_c : t_vel_x)*speed_factor);
         vel.y = clamp(vel.y, -t_vel_up, t_vel_down);
         
         //text(jumptimer, 100, 100);
         
-        pos.x -= speed;
+        pos.x -= speed_factor*BASE_SPEED;
         
         int steps = 64;
         
         PVector nvel = PVector.div(vel, steps);
+        nvel.y *= speed_factor;
         
         boolean x_done = false;
         boolean y_done = false;
@@ -64,7 +65,7 @@ class Player{
                     if (coll_y1) {
                         if (keyPressed) {
                             vel.y = -jp;
-                            jumptimer = 30 * steps;
+                            jumptimer = (int)((30 * steps)/speed_factor);
                         }
                     }
                     pos.y -= nvel.y;

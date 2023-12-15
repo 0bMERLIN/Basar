@@ -11,7 +11,7 @@ class Game{
 
     int random_cooldown;
 
-    float speed = 5;
+    float speed_factor = 1.0;
     
     Game(){
         player = new Player();
@@ -34,8 +34,8 @@ class Game{
         background_overlay.render();
         level.render();
         player.render();
-        level.scroll(speed, this);
-        player.update(speed, level, this);
+        level.scroll(speed_factor, this);
+        player.update(speed_factor, level, this);
         renderForegroundEffects();
         displayScore(score, 50, 50);
 
