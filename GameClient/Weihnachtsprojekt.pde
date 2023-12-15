@@ -6,6 +6,7 @@ class WeihnachtsprojektGame implements IGame {
   int loreShownSec = 4;
   int loreSectionShown = 0;
   int loreTime;
+  boolean isFirstRound;
 
   final String[][] LORE_STRINGS = {
     {"Weil sie unbezahlt arbeiten müssen haben die Elfen des Weihnachtsmannes",
@@ -22,7 +23,9 @@ class WeihnachtsprojektGame implements IGame {
     {"Kannst du ihm helfen?"}
   };
 
-  void setup() {
+  void setup(boolean isFirstRound) {
+    this.isFirstRound = isFirstRound;
+    
     loreTime = 0;
     loreStartTime = loreTime;
     loreSectionShown = 0;
@@ -34,7 +37,7 @@ class WeihnachtsprojektGame implements IGame {
   }
 
   boolean draw() {
-    if (loreSectionShown < LORE_STRINGS.length && LORE) {
+    if (loreSectionShown < LORE_STRINGS.length && LORE && isFirstRound ) {
       drawLore();
       return false;
     }
