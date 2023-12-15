@@ -13,7 +13,7 @@ class Level{
     Level() {
         loadTileset();
         loadMapSections();
-        map = new MapSection[4];
+        map = new MapSection[7];
         for (int i = 0; i < this.map.length; i++) {
             addMap(i, 0);
         }
@@ -38,7 +38,7 @@ class Level{
     }
     
     void loadMapSections() {
-        int nsections = 4;
+        int nsections = 7;
         
         this.map_sections_json = new JSONObject[0];
         for (int i = 0; i < nsections; i++) {

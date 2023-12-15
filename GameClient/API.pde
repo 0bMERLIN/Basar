@@ -3,7 +3,7 @@
 
 import processing.net.*;
 
-final String IP = "localhost"; // IP of the server.
+final String IP = "192.168.2.106"; // IP of the server.
 
 // await a http response ending with "END".
 // will hang when no END is provided.
